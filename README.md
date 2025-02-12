@@ -35,6 +35,6 @@ git clone https://github.com/NerinhoAmorim/23.37M2---U4C8O12T---Tarefa-WLS.git
 ## Autor
 
 Desenvolvido por [Nerinho Amorim](https://github.com/NerinhoAmorim).
-```
+
 ## Vídeo de Apresentação
 
