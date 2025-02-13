@@ -47,3 +47,7 @@ void ssd1306_hline(ssd1306_t *ssd, uint8_t x0, uint8_t x1, uint8_t y, bool value
 void ssd1306_vline(ssd1306_t *ssd, uint8_t x, uint8_t y0, uint8_t y1, bool value);
 void ssd1306_draw_char(ssd1306_t *ssd, char c, uint8_t x, uint8_t y);
 void ssd1306_draw_string(ssd1306_t *ssd, const char *str, uint8_t x, uint8_t y);
+void ssd1306_draw_rect(ssd1306_t *ssd, uint8_t x, uint8_t y, uint8_t width, uint8_t height, bool color);
+void ssd1306_fill_rect(ssd1306_t *ssd, uint8_t x, uint8_t y, uint8_t width, uint8_t height, bool color);
+void ssd1306_draw_line(ssd1306_t *ssd, uint8_t x0, uint8_t y0, uint8_t x1, uint8_t y1, bool color);
+void ssd1306_draw_pixel(ssd1306_t *display, int x, int y, bool color);

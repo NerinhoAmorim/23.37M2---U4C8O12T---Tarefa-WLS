@@ -194,3 +194,66 @@ void ssd1306_draw_string(ssd1306_t *ssd, const char *str, uint8_t x, uint8_t y)
     }
   }
 }
+
+void ssd1306_draw_rect(ssd1306_t *ssd, uint8_t x, uint8_t y, uint8_t width, uint8_t height, bool color)
+{
+    for (uint8_t i = x; i < x + width; i++)
+    {
+        ssd1306_draw_pixel(ssd, i, y, color);
+        ssd1306_draw_pixel(ssd, i, y + height - 1, color);
+    }
+    for (uint8_t i = y; i < y + height; i++)
+    {
+        ssd1306_draw_pixel(ssd, x, i, color);
+        ssd1306_draw_pixel(ssd, x + width - 1, i, color);
+    }
+}
+
+void ssd1306_fill_rect(ssd1306_t *ssd, uint8_t x, uint8_t y, uint8_t width, uint8_t height, bool color)
+{
+    for (uint8_t i = x; i < x + width; i++)
+    {
+        for (uint8_t j = y; j < y + height; j++)
+        {
+            ssd1306_draw_pixel(ssd, i, j, color);
+        }
+    }
+}
+
+void ssd1306_draw_line(ssd1306_t *ssd, uint8_t x0, uint8_t y0, uint8_t x1, uint8_t y1, bool color)
+{
+    int dx = abs(x1 - x0);
+    int dy = abs(y1 - y0);
+    int sx = (x0 < x1) ? 1 : -1;
+    int sy = (y0 < y1) ? 1 : -1;
+    int err = dx - dy;
+
+    while (true)
+    {
+        ssd1306_draw_pixel(ssd, x0, y0, color);
+        if (x0 == x1 && y0 == y1)
+            break;
+        int e2 = 2 * err;
+        if (e2 > -dy)
+        {
+            err -= dy;
+            x0 += sx;
+        }
+        if (e2 < dx)
+        {
+            err += dx;
+            y0 += sy;
+        }
+    }
+}
+void ssd1306_draw_pixel(ssd1306_t *display, int x, int y, bool color) {
+  if (x >= display->width || y >= display->height || x < 0 || y < 0) return;
+
+  int index = x + (y / 8) * display->width;
+
+  if (color)
+      display->ram_buffer[index] |= (1 << (y % 8));
+  else
+      display->ram_buffer[index] &= ~(1 << (y % 8));
+}
+
