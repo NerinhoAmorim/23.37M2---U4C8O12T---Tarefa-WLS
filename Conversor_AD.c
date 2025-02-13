@@ -21,7 +21,6 @@
 #define I2C_ID i2c1
 #define I2C_ADDR 0x3C
 #define I2C_FREQ 100000 // 100kHz
-// Configuração BOOTSEL com Botão B
 
 // Configuração PWM
 const uint16_t PWM_WRAP = 4095; // Valor máximo do contador PWM
